@@ -1,5 +1,5 @@
 const desc = process.argv[2];
-const project = process.argv[3] | 'none';
+const project = (process.argv[3] === undefined) ? '' : process.argv[3];
 const date = new Date();
 const fs = require('fs');
 const inherits = require('util').inherits;
