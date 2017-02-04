@@ -15,7 +15,11 @@ class TimeElapsed extends Transform{
 }
 TimeElapsed.prototype._transform = function (chunk, enc, cb){
   const allLines = chunk.toString().split('\n').map(x => {
-    return x + ',45';
+    const line = x.split(',');
+    if((!line[1] || line[1] === 0) && line[2] !== desc){
+      line[1] = (toExcelTime(date) - line[0]);
+    }
+    return line.join(',');
   })
   cb(null, allLines.join('\n'));
 }
@@ -23,9 +27,9 @@ TimeElapsed.prototype._transform = function (chunk, enc, cb){
 const newLine = toExcelTime(date) + ',,' + desc + ',' + project + '\n';
 fs.appendFile('time.csv', newLine, err=>console.log(err));
 
-// const read = fs.createReadStream('time.csv');
-// const write = fs.createWriteStream('time2.csv');
-// read.pipe(new TimeElapsed()).pipe(write);
+const read = fs.createReadStream('time.csv');
+const write = fs.createWriteStream('time2.csv');
+read.pipe(new TimeElapsed()).pipe(write);
 
 function toExcelTime(date){
   const day = 24 * 60 * 60 * 1000
