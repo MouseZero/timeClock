@@ -6,6 +6,8 @@ const inherits = require('util').inherits;
 const Transform = require('stream').Transform;
 const PassThrough = require('stream').PassThrough;
 
+fs.open('time.csv', 'wx', ()=>{});
+
 class TimeElapsed extends Transform{
   constructor(options){
     super(options);
@@ -42,6 +44,9 @@ function addCurrentTime(){
     const source = fs.createReadStream('time2.csv');
     const target = fs.createWriteStream('time.csv');
     source.pipe(target);
+    source.on('end', ()=>{
+      fs.unlinkSync('time2.csv');
+    })
   })
   write.on('error', x => console.log(x));
 }
