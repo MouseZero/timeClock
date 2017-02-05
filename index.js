@@ -17,7 +17,7 @@ TimeElapsed.prototype._transform = function (chunk, enc, cb){
   const allLines = chunk.toString().split('\n').map(x => {
     const line = x.split(',');
     if(line.length < 3) return '';
-    if((!line[1] || line[1] === 0)){
+    if((!line[1] || line[1] === 0) && line[2] !== 'out'){
       line[1] = (toExcelTime(date) - line[0]);
     }
     return line.join(',');
