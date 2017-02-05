@@ -1,0 +1,26 @@
+{
+  "name": "time-clock",
+  "version": "1.0.0",
+  "description": "keep track of what you spend your time on.",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MouseZero/timeClock.git"
+  },
+  "keywords": [
+    "time",
+    "clock",
+    "punch",
+    "card"
+  ],
+  "author": "Russell Murray",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MouseZero/timeClock/issues"
+  },
+  "homepage": "https://github.com/MouseZero/timeClock#readme"
+}
