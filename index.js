@@ -2,9 +2,7 @@ const desc = process.argv[2] || 'out';
 const project = process.argv[3] || '';
 const date = new Date();
 const fs = require('fs');
-const inherits = require('util').inherits;
 const Transform = require('stream').Transform;
-const PassThrough = require('stream').PassThrough;
 
 fs.open('time.csv', 'wx', ()=>{});
 
@@ -17,7 +15,7 @@ TimeElapsed.prototype._transform = function (chunk, enc, cb){
   const allLines = chunk.toString().split('\n').map(x => {
     const line = x.split(',');
     if(line.length < 3) return '';
-    if((!line[1] || line[1] === 0) && line[2] !== 'out'){
+    if(!line[1] && line[2] !== 'out'){
       line[1] = (toExcelTime(date) - line[0]);
     }
     return line.join(',');
